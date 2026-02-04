@@ -11,13 +11,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          [span_3](start_span)fetch-depth: 0
+          fetch-depth: 0
 
-      - name: Merge Dev into ITG
+      - name: Sync and Merge Dev into ITG
         run: |
           git config --global user.name"Automation-Bot"
           git config --global user.email"actions@github.com"
+          git fetch origin dev
           git fetch origin ITG
-          git checkout ITG
-          git merge origin/dev --no-ff -m "Automated merge from dev to ITG"
+          git checkout ITG || git checkout -b ITG origin/ITG
+          git merge origin/dev --no-ff --strategy-option theirs -m "Automated merge from dev to ITG"
           git push origin ITG
