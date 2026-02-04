@@ -16,8 +16,8 @@ jobs:
 
       - name: Merge Dev into ITG
         run: |
-          git config --global user.name"Automation"
-          git config --global user.email"bobby.gundala@hp.com"
+          git config --global user.name"Automation-Bot"
+          git config --global user.email"actions@github.com"
           git fetch origin ITG
           git checkout ITG
           git merge origin/dev --no-ff -m "Automated merge from dev to ITG"
