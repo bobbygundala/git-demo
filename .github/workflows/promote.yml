@@ -1,12 +1,12 @@
 name: promote Dev to ITG
 on:
   workflow_dispatch:
-
+  
+permissions:
+  contents: write
 jobs:
   promote-job:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,8 +17,7 @@ jobs:
         run: |
           git config --global user.name"bobbygundala"
           git config --global user.email"bobby.gundala@hp.com"
-          git fetch origin dev
-          git fetch origin ITG
-          git checkout ITG || git checkout -b ITG origin/ITG
-          git merge origin/dev --no-ff --strategy-option theirs -m "Automated merge from dev to ITG"
+          git fetch origin
+          git checkout ITG
+          git merge origin/dev --no-ff -m "Automated merge from dev to ITG"
           git push origin ITG
