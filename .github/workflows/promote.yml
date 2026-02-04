@@ -1,0 +1,20 @@
+name: promote Dev to ITG
+on:
+  workflow_dispatch:
+
+jobs:
+  promote-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Merge Dev into ITG
+        run: |
+          git config --global user.name"Automation"
+          git config --global user.email"bobby.gundala@hp.com"
+          git checkout ITG
+          git merge dev
+          git push origin ITG
