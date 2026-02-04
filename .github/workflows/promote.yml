@@ -11,8 +11,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          persist-credentials: true
+          [span_3](start_span)fetch-depth: 0
 
       - name: Merge Dev into ITG
         run: |
