@@ -5,16 +5,20 @@ on:
 jobs:
   promote-job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: $ {{ secrets.GITHUB_TOKEN }}
 
       - name: Merge Dev into ITG
         run: |
           git config --global user.name"Automation"
           git config --global user.email"bobby.gundala@hp.com"
+          git fetch origin ITG
           git checkout ITG
-          git merge dev
+          git merge origin/dev --no-ff -m "Automated merge from dev to ITG"
           git push origin ITG
